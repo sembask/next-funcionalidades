@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -12,6 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  const [mainHeight, setMainHeight] = useState("100vh");
+
+  useEffect(() => {
+    const header = document.getElementById("header");
+    if (header) {
+      const headerHeight = header.offsetHeight; // Altura do header
+      setMainHeight(`calc(100vh - ${headerHeight}px)`); // Ajusta a altura do main
+    }
+  }, []);
+
   return (
     <div>
       <Head>
@@ -31,7 +43,10 @@ export default function Home() {
         />
       </Head>
 
-      <main className=" container mx-auto border-t border-dashed flex flex-col items-center justify-center min-h-screen px-6 overflow-hidden">
+      <main
+        style={{ height: mainHeight }}
+        className=" container mx-auto border-t border-dashed flex flex-col items-center justify-center  px-6 overflow-hidden"
+      >
         {/* Imagem */}
         <div className="relative w-full max-w-sm h-48">
           <Image

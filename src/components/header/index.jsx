@@ -25,18 +25,21 @@ export function Header() {
   };
   return (
     <>
-      <header className="container mx-auto flex justify-between items-center px-6 py-4">
+      <header
+        id="header"
+        className="container mx-auto flex justify-between items-center px-6 py-4"
+      >
         <section>
           <nav>
             <Link href="/" className="text-2xl font-bold">
               Tasks
               <span className="text-red-600 text-2xl "> + </span>
             </Link>
-            <Link href="/" className="ml-6">
-              Painel
+            <Link href="/dashboard" className="ml-6">
+              Dashboard
             </Link>
             <Link href="/" className="ml-6">
-              Documentos
+              Documents
             </Link>
           </nav>
         </section>
