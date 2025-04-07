@@ -1,3 +1,11 @@
+import Head from "next/head";
+
 export default function Dashboard() {
-  return <div></div>;
+  return (
+    <div>
+      <Head>
+        <title></title>
+      </Head>
+    </div>
+  );
 }
