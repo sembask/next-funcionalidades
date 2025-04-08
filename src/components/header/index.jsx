@@ -1,8 +1,10 @@
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { SunIcon, MoonIcon, UserIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export function Header() {
+  const { data: session, status } = useSession();
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function Header() {
     <>
       <header
         id="header"
-        className="container mx-auto flex justify-between items-center px-6 py-4"
+        className="  border-b border-dashed container mx-auto flex justify-between items-center px-6 py-4"
       >
         <section>
           <nav>
@@ -38,7 +40,7 @@ export function Header() {
             <Link href="/dashboard" className="ml-6">
               Dashboard
             </Link>
-            <Link href="/" className="ml-6">
+            <Link href="/login" className="ml-6">
               Documents
             </Link>
           </nav>
@@ -57,9 +59,25 @@ export function Header() {
               />
             )}
           </button>
-          <button className="hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-full p-2 transition-colors duration-300 ease-in-out">
-            <UserIcon className="h-5 w-5 text-black dark:text-white"></UserIcon>
-          </button>
+          {status === "loading" ? (
+            <></>
+          ) : session ? (
+            <button
+              onClick={() => signOut()}
+              className="hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-full p-2 transition-colors duration-300 ease-in-out flex items-center flex-row-reverse gap-2"
+            >
+              {" "}
+              Olá {session?.user?.name}
+              <UserIcon className="h-5 w-5 dark"></UserIcon>
+            </button>
+          ) : (
+            <button
+              className="hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded-full p-2 transition-colors duration-300 ease-in-out"
+              onClick={() => signIn("discord")}
+            >
+              <UserIcon className="h-5 w-5 text-black dark:text-white"></UserIcon>
+            </button>
+          )}
         </section>
       </header>
     </>
