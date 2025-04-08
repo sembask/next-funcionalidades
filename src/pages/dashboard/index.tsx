@@ -4,8 +4,9 @@ export default function Dashboard() {
   return (
     <div>
       <Head>
-        <title></title>
+        <title className="dark">Dashboard</title>
       </Head>
+      <h1>Dashboard</h1>
     </div>
   );
 }

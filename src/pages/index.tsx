@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function Home() {
         />
       </Head>
 
-      <main className=" container mx-auto border-t border-dashed flex flex-col items-center justify-center min-h-screen px-6 overflow-hidden">
+      <main className=" main-auto-height mx-auto flex flex-col items-center justify-center  px-6 overflow-hidden">
         {/* Imagem */}
         <div className="relative w-full max-w-sm h-48">
           <Image
