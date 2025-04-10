@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
