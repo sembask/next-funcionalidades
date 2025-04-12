@@ -5,8 +5,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@radix-ui/react-dropdown-menu";
+import { Task, columns } from "@/components/tasks/columns";
+import { DataTable } from "@/components/tasks/data-table";
 
-export default function Dashboard() {
+const getData = async (): Promise<Task[]> => {
+  // Fetch data from your API here.
+  return [
+    {
+      id: "728ed52f",
+      status: "public",
+      task: "m@example.com",
+    },
+    // ...
+  ];
+};
+
+export default async function Dashboard() {
+  const data = await getData();
+
   return (
     <>
       <Head>
@@ -29,6 +45,9 @@ export default function Dashboard() {
               Create
             </Button>
           </section>
+          <div className="container mx-auto py-10">
+            <DataTable columns={columns} data={data} />
+          </div>
         </div>
       </main>
     </>
