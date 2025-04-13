@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -51,7 +52,10 @@ export const columns: ColumnDef<Task>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View task details</DropdownMenuItem>
-            <DropdownMenuItem>delete task</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500 hover:!text-red-700">
+              <TrashIcon className="icon-color-white" />
+              Delete task
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
