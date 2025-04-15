@@ -5,8 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { Task, columns } from "@/components/tasks/columns";
-import { DataTable } from "@/components/tasks/data-table";
+import { Task, columns, getColumns } from "@/components/tasks-table/columns";
+import { DataTable } from "@/components/tasks-table/data-table";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { db } from "@/services/firebaseConnection";
 import {
@@ -17,9 +17,12 @@ import {
   orderBy,
   where,
   onSnapshot,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
-import { create } from "domain";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { redirect } from "next/dist/server/api-utils";
+import { RouteMatcher } from "next/dist/server/route-matchers/route-matcher";
 
 interface HomeProps {
   user: {
@@ -30,6 +33,7 @@ interface HomeProps {
 }
 
 export default function Dashboard({ user }: HomeProps) {
+  const router = useRouter();
   const [data, setData] = useState<Task[]>([]);
   const [task, setTask] = useState<string>("teste");
   const [status, setStatus] = useState<"public" | "private">("private");
@@ -79,6 +83,15 @@ export default function Dashboard({ user }: HomeProps) {
     }
   }
 
+  async function handleDeleteTask(taskId: string) {
+    const docTaskRef = doc(db, "tasks", taskId);
+    await deleteDoc(docTaskRef);
+  }
+
+  function viewTask(taskId: string) {
+    router.push(`/task/${taskId}`);
+  }
+
   return (
     <>
       <Head>
@@ -113,7 +126,10 @@ export default function Dashboard({ user }: HomeProps) {
             </form>
           </section>
           <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={data} />
+            <DataTable
+              columns={getColumns(handleDeleteTask, viewTask)}
+              data={data}
+            />
           </div>
         </div>
       </main>

@@ -20,7 +20,10 @@ export type Task = {
   task: string;
 };
 
-export const columns: ColumnDef<Task>[] = [
+export const getColumns = (
+  handleDeleteTask: (taskId: string) => void,
+  viewTask: (taskId: string) => void
+): ColumnDef<Task>[] => [
   {
     accessorKey: "task",
     header: "Task",
@@ -51,9 +54,14 @@ export const columns: ColumnDef<Task>[] = [
               Copy task ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View task details</DropdownMenuItem>
-            <DropdownMenuItem className="text-red-500 hover:!text-red-700">
-              <TrashIcon className="icon-color-white" />
+            <DropdownMenuItem onClick={() => viewTask(task.id)}>
+              View task details
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-red-500 hover:!text-red-700"
+              onClick={() => handleDeleteTask(task.id)}
+            >
+              <TrashIcon className="h-4 w-4 mr-2" />
               Delete task
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -62,3 +70,8 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
 ];
+
+export const columns: ColumnDef<Task>[] = getColumns(
+  () => {},
+  () => {}
+);
