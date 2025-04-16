@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open",
+    "test:dev": "concurrently \"yarn dev\" \"yarn cypress:open\""
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -36,6 +38,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
+    "cypress": "^14.3.0",
     "tailwindcss": "^4.1.2",
     "typescript": "^5"
   }
