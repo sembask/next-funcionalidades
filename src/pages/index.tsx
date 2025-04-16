@@ -1,8 +1,12 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import Head from "next/head";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat-variable",
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,9 +36,14 @@ export default function Home() {
           rel="stylesheet"
           className={geistMono.className}
         />
+        <link
+          href={montserrat.variable}
+          rel="stylesheet"
+          className={montserrat.className}
+        />
       </Head>
 
-      <main className=" main-auto-height mx-auto flex flex-col items-center justify-center  px-6 overflow-hidden">
+      <main className="main-auto-height mx-auto flex flex-col items-center justify-center px-6 overflow-hidden">
         {/* Imagem */}
         <div className="relative w-full max-w-sm h-48">
           <Image
@@ -50,7 +59,7 @@ export default function Home() {
           Sistema feito para você organizar seus estudos e tarefas
         </h2>
 
-        <div className="flex flex-wrap sm:flex-row flex-col items-center justify-around gap-6 mt-6">
+        <div className="flex flex-wrap sm:flex-row flex-col items-center justify-around gap-6 mt-6 ">
           <section>
             <span className="bg-white dark:bg-neutral-800 text-black dark:text-white border border-gray-300 dark:border-neutral-700 rounded-lg px-6 py-2 shadow-md hover:shadow-lg transition">
               + 7 mil posts
